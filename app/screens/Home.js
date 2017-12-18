@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { StatusBar, KeyboardAvoidingView } from 'react-native';
 
 import { Container } from '../components/Container';
@@ -8,6 +9,8 @@ import { ClearButton } from '../components/Buttons';
 import { LastConverted } from '../components/Text';
 import { Header } from '../components/Header';
 
+import { changeCurrencyAmount, swapCurrency } from '../actions/currencies';
+
 const TEMP_BASE_CURRENCY = 'USD';
 const TEMP_QUOTE_CURRENCY = 'RUB';
 const TEMP_BASE_PRICE = '100';
@@ -16,24 +19,30 @@ const TEMP_LAST_CONVERTED = new Date();
 const TEMP_CONVERSION_RATE = 58.745;
 
 class Home extends Component {
-  handleChangeText = () => {
-    console.log('change text');
+  static propTypes = {
+    navigation: PropTypes.object,
+  };
+
+  handleChangeText = (text) => {
+    // TODO: Dispatch this action to redux
+    console.log(changeCurrencyAmount(text));
   };
 
   handlePressBaseCurrency = () => {
-    console.log('press base currency');
+    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' });
   };
 
   handlePressQuoteCurrency = () => {
-    console.log('press quote currency');
+    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' });
   };
 
   handleSwapCurrency = () => {
-    console.log('handle swap currency');
+    // TODO: Dispatch this action to redux
+    console.log(swapCurrency());
   };
 
   handleOptionsPress = () => {
-    console.log('options press');
+    this.props.navigation.navigate('Options');
   };
 
   render() {
